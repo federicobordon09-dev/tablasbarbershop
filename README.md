@@ -1,67 +1,32 @@
-# Entre Tablas Barbershop — Landing
+# Entre Tablas Barbershop · Landing
 
-Landing de alta conversión para **Entre Tablas Barbershop** (Arístides 768, Mendoza), construida con **Next.js 16 (App Router)**, **React 19**, **TypeScript** y **Tailwind CSS v4**.
+Landing **premium de estilo neo brutalista** para **Entre Tablas Barbershop** (Arístides 768, Mendoza): cortes, color masculino y barba con 8 años de oficio en el corazón de Mendoza. "La mejor Barbería de Mendoza", con reservas online por TuTurno. Construida con datos reales verificados (dossier `local.md` y bio de Instagram, agosto 2026), **sin datos inventados**: lo que el negocio no confirmó se deja pendiente y no se inventa.
 
-## Qué es
+> 🎨 Estilo: **Neo Brutalismo** — paper `#FAF7F2` / ink `#0A0A0A` / blood `#C53030` / amber `#D4A81E` / surface `#FFFFFF`. Tipografías **Space Grotesk** (títulos) + **IBM Plex Sans** (cuerpo) + **JetBrains Mono** (datos).
 
-Una sola página, pensada para convertir visitas de Instagram y Google en **reservas de turno**:
+## Qué incluye
 
-- **Hero** con la promesa de marca ("Tu corte no falla") y CTA primario a TuTurno.
-- **Marquee** de beneficios y valores del negocio (bucle infinito en CSS).
-- **Servicios** con lo que incluye cada sección de la casa y CTA por servicio.
-- **Social proof**: 10.5K seguidores en IG, 8 años de trayectoria, ubicación.
-- **Visit / Horarios** con ubicación, mapa y tabla de horarios.
-- **Final CTA** y barra fija inferior en mobile (conversión siempre visible).
-- **Al recargar**, la página aterriza arriba de todo (anula la restauración de scroll del navegador) vía `ScrollToTop`.
+- **Hero** con la promesa "Tu corte no falla" y CTA de reserva por TuTurno
+- **Marquee** de valores con bucle infinito (Corte, Color, Barba, #nofalla, Est. 2018)
+- **Servicios**: corte, color, barba y combos, con lo que incluye cada uno y CTA por servicio
+- **Prueba social**: 10.5K en Instagram, 8 años de oficio y el sello #nofalla
+- **Dónde y cuándo**: dirección, horarios (Mar–Sáb 10–20) y reserva online
+- **CTA final** y barra fija en mobile para reservar siempre a mano
 
-## Design system
+## Contacto
 
-Dirección visual **Neo Brutalismo** fiel al dossier del negocio (sin depender de marcos grises):
+- **Reservas**: TuTurno · tuturno.io/entretablasbarbershop
+- **Instagram**: @entretablas.mza · **Threads**: @entretablas.mza
+- **WhatsApp / teléfono / email**: pendientes de confirmar con el negocio
 
-- `paper #FAF7F2` / `ink #0A0A0A` / `blood #C53030` / `amber #D4A81E` / `surface #FFFFFF`
-- Bordes `2px` de tinta, sin radio de esquina, sombras duras.
-- Tipografías: **Space Grotesk** (display), **IBM Plex Sans** (cuerpo), **JetBrains Mono** (datos/sistema).
-- Tokens vía `@theme` en `globals.css` + `@utility` para `border-brutal` y `shadow-brutal`.
+## Fuente de datos
 
-## Sistema de animación (Motion)
+Todos los datos provienen de fuentes públicas verificadas (agosto 2026) y del dossier del negocio en `local.md`. Lo no verificable queda marcado como pendiente.
 
-Librería: [`motion`](https://motion.dev) (`motion/react`, v13). Sin GSAP.
+## Estado
 
-- **Un solo easing** `[0.22, 1, 0.36, 1]` — afilado, sin rebotes, coherente con el carácter brutalista.
-- **Solo `transform`/`opacity`** para animar (no toca layout ni paint).
-- Revelados por scroll **una sola vez** (`once: true`, viewport `-64px`).
-- **`MotionConfig reducedMotion="user"`** global: respeta `prefers-reduced-motion` del visitante.
-- Microinteracciones en botones: `whileHover` + `whileTap` (scale 1.02 / 0.97).
-
-### Piezas
-
-| Archivo | Rol |
-| --- | --- |
-| `src/lib/animations.ts` | Tokens de motion: `EASE`, `DURATIONS`, `VIEWPORT`, variants `fadeUp/fadeDown/fadeIn/scaleIn`, factory `fadeUpDelay`, `staggerContainer`. |
-| `src/components/MotionProvider.tsx` | Envuelve el layout con `reducedMotion="user"`. |
-| `src/components/ui/Reveal.tsx` | Revelado individual por scroll (opacity + translateY). |
-| `src/components/ui/Stagger.tsx` | `StaggerGroup` (con `trigger: "inView" \| "mount"`) + `StaggerItem`. |
-| Hero / Navbar / StickyBar | Secuencias de entrada y estado de scroll (client). |
-| Sections + Footer | Staggers y reveals al entrar en viewport. |
-
-Marquee: bucle infinito con CSS puro (intencional, no usa motion para no duplicar trabajo de compositor); se desactiva si el sistema pide `prefers-reduced-motion`.
-
-`ScrollToTop`: al recargar la página, `useLayoutEffect` lleva arriba de todo antes del primer paint (anulando el scroll restoration del navegador) y se re-aplica en `load`.
-
-## Datos
-
-- **`src/lib/data.ts`** centraliza negocio, servicios, horarios, stats, links y placeholders `null` + `TODO` para datos no verificables (whatsapp, teléfono, email) y fotos reales (`PlaceholderImage`).
-- Precios de servicios **no publicados todavía** — se muestran con nota aclaratoria.
-- `SITE_URL` provisorio `https://entretablasbarbershop.vercel.app` — **TODO**: dominio real antes de producción.
-- SEO: metadatos, Open Graph, JSON-LD `BarberShop` y `sitemap.xml`/`robots.txt`.
-
-## Comandos
-
-```bash
-pnpm install     # usar pnpm (npm falla por pnpm-workspace.yaml del monorepo)
-pnpm dev         # desarrollo
-pnpm build       # build de producción
-pnpm start       # servir el build
-pnpm exec tsc --noEmit                       # typecheck
-pnpm exec eslint "src/**/*.{ts,tsx}"         # lint
-```
+- ✅ Landing completa, responsive y con animaciones premium (motion)
+- ✅ Marquee de marca con bucle infinito (corre siempre) y scroll al inicio al recargar
+- ✅ SEO: metadata, imagen de Open Graph/Twitter generada, icon.svg propio, sitemap y robots.txt
+- 🔴 Sin fotos reales todavía (usa placeholders de marca)
+- 🔴 Pendiente: dominio de producción, precios de servicios y WhatsApp/teléfono/email de contacto
