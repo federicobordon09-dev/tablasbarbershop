@@ -1,26 +1,70 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-paper: #faf7f2;
+  --color-ink: #0a0a0a;
+  --color-blood: #c53030;
+  --color-blood-dark: #a12626;
+  --color-amber: #d4a81e;
+  --color-surface: #ffffff;
+
+  --font-display: var(--font-space-grotesk);
+  --font-body: var(--font-ibm-plex);
+  --font-mono: var(--font-jetbrains);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--color-ink);
+    color: var(--color-amber);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-blood);
+    outline-offset: 3px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@utility border-brutal {
+  border: 2px solid var(--color-ink);
+}
+
+@utility shadow-brutal-sm {
+  box-shadow: 4px 4px 0 0 var(--color-ink);
+}
+
+@utility shadow-brutal {
+  box-shadow: 8px 8px 0 0 var(--color-ink);
+}
+
+.marquee-track {
+  animation: marquee 32s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* El marquee corre siempre: es el sello visual de la marca (decisión del negocio). */
+  * {
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
 }
